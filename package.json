@@ -1,0 +1,57 @@
+{
+  "name": "elena-remizova",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:aneurysmjs/elena-remizova.git",
+  "author": "jero <aneurysmjs@outlook.com>",
+  "license": "MIT",
+  "scripts": {
+    "commit": "git-cz",
+    "start": "parcel src/index.html --open",
+    "build": "parcel build src/index.html"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "7.10.4",
+    "@babel/plugin-syntax-async-generators": "7.8.4",
+    "@babel/plugin-transform-runtime": "7.11.0",
+    "@babel/preset-env": "7.11.0",
+    "@babel/preset-react": "7.10.4",
+    "@fullhuman/postcss-purgecss": "2.3.0",
+    "@types/loadable__component": "5.13.0",
+    "@types/node": "14.6.0",
+    "@types/react": "16.9.48",
+    "@types/react-dom": "16.9.8",
+    "@types/react-router-dom": "5.1.5",
+    "@typescript-eslint/eslint-plugin": "3.10.1",
+    "@typescript-eslint/parser": "3.10.1",
+    "commitizen": "4.2.1",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "7.7.0",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-import-resolver-typescript": "2.2.1",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-jsx-a11y": "6.3.1",
+    "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-react": "7.20.6",
+    "eslint-plugin-react-hooks": "4.1.0",
+    "node-sass": "4.14.1",
+    "parcel-bundler": "1.12.4",
+    "prettier": "2.1.1",
+    "sass": "1.26.10",
+    "typescript": "4.0.2"
+  },
+  "dependencies": {
+    "@loadable/component": "5.10.3",
+    "postcss-modules": "3.2.2",
+    "react": "16.10.1",
+    "react-dom": "16.10.1",
+    "react-router-dom": "5.1.1",
+    "tailwindcss": "1.7.5"
+  }
+}
