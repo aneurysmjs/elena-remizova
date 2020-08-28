@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Home.scss';
 
-const cells = Array(10)
+const cells: Array<{ id: number }> = Array(7)
   .fill({ id: '' })
   .map((o, i) => ({
     ...o,
@@ -15,7 +15,10 @@ function Home(): React.ReactElement {
       <div className="home-grid">
         {cells.map(({ id }) => (
           <div key={id} className="home-grid__item">
-            <div>item {id + 1}</div>
+            <div>
+              <h4>item {id + 1}</h4>
+              <p>make a bunch of columns but the grid will decide how many to make</p>
+            </div>
           </div>
         ))}
       </div>
