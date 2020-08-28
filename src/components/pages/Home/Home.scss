@@ -1,3 +1,5 @@
+@import '../../../assets/scss/mixins';
+
 .home-container {
 }
 
@@ -5,14 +7,15 @@
   display: grid;
   grid-gap: 10px;
 
-  /**
-  * make a bunch of columns but the grid will decide how many to make
-  * and each of the columns will be at minimum 300px and a maximum of 1fr
-  */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-template-rows: minmax(100px, auto);
-
+  grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+  grid-template-rows: minmax(auto, auto);
   grid-auto-flow: dense;
+
+  @include media-sm() {
+    background: chocolate;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: minmax(100px, auto);
+  }
 }
 
 .home-grid__item {
@@ -21,39 +24,35 @@
   padding: 20px;
   background: gray;
 
+  /**
+  * since is mobile first, there's not grid layout
+  */
+  grid-column: unset;
+  grid-row: unset;
+
   &:hover {
     background: rgba(149, 149, 149, 0.329);
   }
 
-  &:nth-child(1) {
-    grid-column: span 2;
-    grid-row: span 1;
-  }
+  @include media-sm() {
+    &:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
 
-  &:nth-child(2) {
-    grid-column: span 1;
-    grid-row: span 2;
-  }
+    &:nth-child(2) {
+      grid-column: span 1;
+      grid-row: span 2;
+    }
 
-  &:nth-child(4) {
-    grid-column: span 1;
-    grid-row: span 2;
-  }
+    &:nth-child(4) {
+      grid-column: span 1;
+      grid-row: span 2;
+    }
 
-  &:nth-child(5) {
-    grid-column: span 3;
-    grid-row: span 1;
-  }
-}
-
-@media (max-width: 991px) {
-  .home-grid {
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
-    grid-template-rows: minmax(auto, auto);
-  }
-
-  .home-grid__item {
-    grid-column: unset !important;
-    grid-row: unset !important;
+    &:nth-child(5) {
+      grid-column: span 3;
+      grid-row: span 1;
+    }
   }
 }
