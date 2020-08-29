@@ -5,35 +5,53 @@
 
 .home-grid {
   display: grid;
-  grid-gap: 10px;
-
-  grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
-  grid-template-rows: minmax(auto, auto);
   grid-auto-flow: dense;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: minmax(100px, auto);
+}
 
-  @include media-sm() {
-    background: chocolate;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-template-rows: minmax(100px, auto);
+.home-grid__mask {
+  align-items: center;
+  background: #0000006e;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  position: absolute;
+  top: -100%;
+  transition: top 0.3s ease;
+  width: 100%;
+  p,
+  h3 {
+    color: white;
+    // padding: 1rem;
   }
 }
 
 .home-grid__item {
+  // background: gray;
   display: grid;
-  place-items: center;
-  padding: 20px;
-  background: gray;
-
-  /**
-  * since is mobile first, there's not grid layout
-  */
+  // since is mobile first, there's not grid layout
   grid-column: unset;
   grid-row: unset;
+  // end
+  overflow: hidden;
+  place-items: center;
+  position: relative;
 
-  &:hover {
-    background: rgba(149, 149, 149, 0.329);
+  & img {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    width: 100%;
   }
 
+  &:hover {
+    .home-grid__mask {
+      top: 0;
+    }
+  }
   @include media-sm() {
     &:nth-child(1) {
       grid-column: span 2;
