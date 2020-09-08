@@ -6,7 +6,7 @@ import img5 from '~/assets/img/work/elena-remizova-paint-portrait-mother.jpg';
 import img6 from '~/assets/img/work/elena-remizova-paint-portrait-woman.jpg';
 import img7 from '~/assets/img/work/elena-remizova-paint-road-to-mountains.jpg';
 import img8 from '~/assets/img/work/elena-remizova-paint-village-lake.jpg';
-import img9 from '~/assets/img/work/elena-remizova-paint-оktyabrskaya-street.jpg';
+import img9 from '~/assets/img/work/elena-remizova-paint-oktyabrskaya-street.jpg';
 import img10 from '~/assets/img/work/elena-remizova-paint-birch.jpg';
 import img11 from '~/assets/img/work/elena-remizova-paint-forest.jpg';
 import img12 from '~/assets/img/work/elena-remizova-paint-lupines.jpg';
@@ -26,7 +26,7 @@ export default [
   { id: 5, img: img6, title: 'Женщина' },
   { id: 6, img: img7, title: 'Дорога горам' },
   { id: 7, img: img8, title: 'Годоское осеро' },
-  { id: 8, img: img9, title: '' },
+  { id: 8, img: img9, title: 'улица Октябрьская' },
   { id: 9, img: img10, title: '' },
   { id: 10, img: img11, title: '' },
   { id: 11, img: img12, title: '' },

@@ -81,6 +81,11 @@
 
     &:nth-child(13) {
       grid-column: span 3;
+      grid-row: span 2;
+    }
+
+    &:last-child {
+      grid-column: span 2;
     }
   }
 }

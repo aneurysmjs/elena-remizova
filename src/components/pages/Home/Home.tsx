@@ -6,7 +6,7 @@ import pics from './pics';
 
 const Home: React.FunctionComponent = () => {
   return (
-    <div className="home__container">
+    <div className="home__container mb-2">
       <div className="home-grid">
         {pics.map(({ id, img, title }) => (
           <div key={id} className="home-grid__item">
