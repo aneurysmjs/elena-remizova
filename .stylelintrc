@@ -10,7 +10,7 @@
         "tailwind",
         "mixin",
         "include",
-        "at-root
+        "at-root"
       ]
     }],
     "scss/at-rule-no-unknown": true,
