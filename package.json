@@ -29,6 +29,7 @@
     "@types/react-router-dom": "5.1.5",
     "@typescript-eslint/eslint-plugin": "3.10.1",
     "@typescript-eslint/parser": "3.10.1",
+    "add": "2.0.6",
     "commitizen": "4.2.1",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.7.0",
@@ -42,6 +43,7 @@
     "eslint-plugin-react-hooks": "4.1.0",
     "node-sass": "4.14.1",
     "parcel-bundler": "1.12.4",
+    "postcss-import": "12.0.1",
     "prettier": "2.1.1",
     "sass": "1.26.10",
     "stylelint": "13.6.1",
@@ -49,7 +51,8 @@
     "stylelint-config-recommended": "3.0.0",
     "stylelint-prettier": "1.1.2",
     "stylelint-scss": "3.18.0",
-    "typescript": "4.0.2"
+    "typescript": "4.0.2",
+    "yarn": "1.22.5"
   },
   "dependencies": {
     "@loadable/component": "5.10.3",
