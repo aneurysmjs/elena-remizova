@@ -1,0 +1,27 @@
+.footer {
+  border-top: 1px solid;
+  @apply bg-white bottom-0 left-0 border-gray-300;
+
+  display: grid;
+
+  place-items: center;
+  position: sticky;
+  width: 100%;
+}
+
+.footer__made-with {
+  @apply text-2xl text-gray-600 mt-4;
+}
+
+.footer__content {
+  @apply bottom-0 left-0 py-8 px-4 flex justify-evenly;
+  width: 100%;
+}
+
+.footer__img {
+  @apply h-16 w-16 rounded-full;
+}
+
+.footer__copyright {
+  @apply text-white text-center bg-gray-900 w-full p-5;
+}

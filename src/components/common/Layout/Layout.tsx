@@ -1,16 +1,18 @@
 import React from 'react';
 
 import Navbar from '~/components/common/Navbar';
+import Footer from '~/components/common/Footer';
 
 interface PropsType {
   children: Array<React.ReactElement> | React.ReactElement;
 }
 
 const Layout = (props: PropsType): React.ReactElement => (
-  <main className="container mx-auto pt-4">
+  <React.Fragment>
     <Navbar />
-    {props.children}
-  </main>
+    <main className="bg-white pt-4 min-h-screen z-10 relative">{props.children}</main>
+    <Footer />
+  </React.Fragment>
 );
 
 export default Layout;
