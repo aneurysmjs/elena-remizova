@@ -10,7 +10,7 @@
 }
 
 .footer__made-with {
-  @apply text-2xl text-gray-600 mt-4;
+  @apply text-2xl text-gray-600 mt-8;
 }
 
 .footer__content {
@@ -23,5 +23,5 @@
 }
 
 .footer__copyright {
-  @apply text-white text-center bg-gray-900 w-full p-5;
+  @apply text-white font-semibold text-center bg-gray-900 w-full p-5;
 }
