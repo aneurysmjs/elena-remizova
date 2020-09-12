@@ -1,0 +1,23 @@
+.portfolio {
+  @apply mx-auto mb-10;
+}
+
+.portfolio__title {
+  @apply text-4xl text-gray-800 mb-16 text-center;
+}
+
+.portfolio__gallery {
+  animation: fadein 1.5s;
+  position: relative;
+}
+
+@keyframes fadein {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
