@@ -1,0 +1,28 @@
+@import '../../../assets/scss/mixins';
+
+.home {
+  align-items: center;
+  display: flex;
+  height: calc(100vh - 245px);
+  justify-content: center;
+}
+
+.home__content {
+  @apply p-8;
+}
+
+.home__title {
+  @apply text-4xl mb-12 text-gray-800;
+
+  @include media-sm() {
+    @apply text-6xl;
+  }
+}
+
+.home__description {
+  @apply text-2xl text-gray-500;
+
+  @include media-sm() {
+    @apply text-4xl text-left;
+  }
+}
