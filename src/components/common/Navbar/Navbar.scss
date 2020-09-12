@@ -7,7 +7,15 @@
 }
 
 .navbar-link {
-  @apply font-light py-2 pr-8 rounded text-gray-800;
+  @apply font-light py-2 pl-8 rounded text-gray-800;
+
+  &:last-child {
+    @apply pr-4;
+
+    @screen sm {
+      @apply pr-0;
+    }
+  }
 }
 
 .navbar-link--active {
