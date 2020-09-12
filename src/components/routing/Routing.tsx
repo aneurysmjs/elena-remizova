@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, HashRouter as Router } from 'react-router-dom';
 import loadable from '@loadable/component';
 
 import Layout from '~/components/common/Layout';

@@ -56,6 +56,7 @@
   },
   "dependencies": {
     "@loadable/component": "5.10.3",
+    "firebase": "7.20.0",
     "postcss-modules": "3.2.2",
     "react": "16.10.1",
     "react-dom": "16.10.1",
