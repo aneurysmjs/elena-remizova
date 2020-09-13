@@ -53,6 +53,10 @@
     &:nth-child(1) {
       grid-column: span 2;
       grid-row: span 1;
+
+      & img {
+        object-position: 0px -40px;
+      }
     }
 
     &:nth-child(2) {
@@ -82,10 +86,16 @@
 
     &:nth-child(16) {
       grid-column: span 2;
+      & img {
+        object-position: 0px -103px;
+      }
     }
 
     &:last-child {
       grid-column: span 3;
+      & img {
+        object-position: 0px -227px;
+      }
     }
   }
 }
