@@ -1,0 +1,50 @@
+.paint-detail {
+  @apply mx-auto flex justify-center;
+  height: calc(100vh - 245px);
+}
+
+.paint-detail__content {
+  @apply mx-auto;
+
+  @screen sm {
+    @apply w-2/4;
+  }
+}
+
+.paint-detail__image {
+  @apply mb-4 overflow-hidden relative h-0;
+
+  & img {
+    @apply object-cover absolute top-0 left-0 opacity-75;
+
+    transition: opacity 0.5s;
+
+    &:hover {
+      @apply opacity-0;
+    }
+  }
+}
+
+.paint-detail__title {
+  @apply text-4xl text-center mb-16;
+}
+
+.paint-detail__zoom-info {
+  @apply text-base text-gray-500 text-justify;
+}
+
+.paint-detail__zoom-info--touch {
+  @apply block;
+
+  @screen sm {
+    @apply hidden;
+  }
+}
+
+.paint-detail__zoom-info--hover {
+  @apply hidden;
+
+  @screen sm {
+    @apply block;
+  }
+}

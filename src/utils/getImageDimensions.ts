@@ -1,9 +1,14 @@
+export interface ImageDimensions {
+  width: number;
+  height: number;
+}
+
 /**
  * @see https://stackoverflow.com/questions/623172/how-to-get-image-size-height-width-using-javascript
  * @param {string} file
  */
 // helper to get dimensions of an image
-function imageDimensions(file: string): Promise<{ width: number; height: number }> {
+function imageDimensions(file: string): Promise<ImageDimensions> {
   return new Promise((resolve, reject) => {
     const img = new Image();
 
@@ -18,7 +23,7 @@ function imageDimensions(file: string): Promise<{ width: number; height: number 
       reject(new Error('There was some problem with the image.'));
     };
 
-    img.src = URL.createObjectURL(file);
+    img.src = file.includes('http') ? URL.createObjectURL(file) : file;
   });
 }
 
