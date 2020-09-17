@@ -89,16 +89,23 @@ const getPageCoords: ZoomFnType = (evt) =>
 /**
  * @see https://codepen.io/galulex/pen/eNZRVq?editors=1010
  */
-export default function imageZoom(evt: React.MouseEvent<HTMLElement, MouseEvent>): string {
-  const img = evt.currentTarget;
+export default function imageZoom(evt: ZoomEventType): string {
   // Here we avoid scrolling when user touches the screen
   if (isMobileBrowser()) {
     evt.preventDefault();
   }
 
+  const img = evt.currentTarget;
   const result = getPageCoords(evt);
-  const x = ((result.offsetX || result.pageX) / img.offsetWidth) * 100;
-  const y = ((result.offsetY || result.pageY) / img.offsetHeight) * 100;
+  const rec = img.getBoundingClientRect();
+
+  /**
+   * get e.offsetX/Y on mobile/iPad
+   *
+   * @see https://stackoverflow.com/questions/11287877/how-can-i-get-e-offsetx-on-mobile-ipad
+   */
+  const x = ((result.offsetX || result.pageX - rec.left) / img.offsetWidth) * 100;
+  const y = ((result.offsetY || result.pageY - rec.top) / img.offsetHeight) * 100;
 
   return `${x}% ${y}%`;
 }
