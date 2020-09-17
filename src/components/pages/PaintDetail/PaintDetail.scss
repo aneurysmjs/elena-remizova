@@ -16,10 +16,19 @@
 
   & img {
     @apply object-cover absolute top-0 left-0 opacity-75;
+    /**
+     * avoid scroll when touching
+     * @see https://stackoverflow.com/a/43275544/5378393
+     */
+    touch-action: none;
 
     transition: opacity 0.5s;
-
-    &:hover {
+    /**
+     * Changing :hover to touch/click for mobile devices
+     * @see https://stackoverflow.com/questions/22559756/changing-hover-to-touch-click-for-mobile-devices
+     */
+    &:hover,
+    &:active {
       @apply opacity-0;
     }
   }

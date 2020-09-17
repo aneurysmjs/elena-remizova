@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import imageZoom from '~/utils/imageZoom';
 import getImageDimensions, { ImageDimensions } from '~/utils/getImageDimensions';
+import isMobileBrowser from '~/utils/isMobileBrowser';
 
 import details from './details';
 
@@ -16,12 +17,12 @@ const PaintDetail: React.FunctionComponent = () => {
   const { paintPath } = useParams<ParamsType>();
   const [position, setPosition] = React.useState<string>();
   const [dimensions, setDimensions] = React.useState<ImageDimensions>();
+  const handleZoom = React.useCallback((e) => setPosition(imageZoom(e)), []);
+
   const content = details.find(({ name }) => paintPath.includes(name));
 
   React.useEffect(() => {
-    getImageDimensions(paintPath).then((result) => {
-      setDimensions(result);
-    });
+    getImageDimensions(paintPath).then(setDimensions);
   }, [paintPath]);
 
   return (
@@ -35,11 +36,12 @@ const PaintDetail: React.FunctionComponent = () => {
           className="paint-detail__image"
           style={{
             backgroundPosition: position || '50% 50%',
+            backgroundRepeat: 'no-repeat',
             backgroundSize: '220%',
             backgroundImage: `url(${paintPath})`,
             paddingBottom: `calc(${dimensions && dimensions.height / dimensions.width} * 100%)`,
           }}
-          onMouseMove={(e) => setPosition(imageZoom(e))}
+          {...(isMobileBrowser() ? { onTouchMove: handleZoom } : { onMouseMove: handleZoom })}
         >
           <img src={paintPath} alt="detail" />
         </figure>
