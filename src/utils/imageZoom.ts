@@ -81,10 +81,34 @@ const getOffsetTouch = compose(getPage, path(['changedTouches', '0']));
 const checkOffset = allPass(mapToCoords(itHasOffsetProp));
 
 /**
- * @desc gets the pageX/Y properties from MouseEvent or TouchEvent
+ * gets the pageX/Y properties from MouseEvent or TouchEvent
  */
 const getPageCoords: ZoomFnType = (evt) =>
   ifElse(checkOffset, getOffset, getOffsetTouch)(evt.nativeEvent);
+
+/**
+ * calculates offset's coordinates from web or mobile
+ * @param {ZoomEventType} evt
+ */
+const calculateCoords = (evt: ZoomEventType): string => {
+  const img = evt.currentTarget;
+  const result = getPageCoords(evt);
+
+  const rec = img.getBoundingClientRect();
+
+  /**
+   * В чем разница между pageX/Y, clientX/Y, screenX/Y в Javascript?
+   * @link https://ru.stackoverflow.com/questions/653693/%D0%92-%D1%87%D0%B5%D0%BC-%D1%80%D0%B0%D0%B7%D0%BD%D0%B8%D1%86%D0%B0-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-pagex-y-clientx-y-screenx-y-%D0%B2-javascript
+   *
+   * get e.offsetX/Y on mobile/iPad
+   *
+   * @see https://stackoverflow.com/questions/11287877/how-can-i-get-e-offsetx-on-mobile-ipad
+   */
+  const x = ((result.offsetX || result.pageX - rec.left) / img.offsetWidth) * 100;
+  const y = ((result.offsetY || result.pageY - rec.top) / img.offsetHeight) * 100;
+
+  return `${x}% ${y}%`;
+};
 
 /**
  * @see https://codepen.io/galulex/pen/eNZRVq?editors=1010
@@ -95,17 +119,5 @@ export default function imageZoom(evt: ZoomEventType): string {
     evt.preventDefault();
   }
 
-  const img = evt.currentTarget;
-  const result = getPageCoords(evt);
-  const rec = img.getBoundingClientRect();
-
-  /**
-   * get e.offsetX/Y on mobile/iPad
-   *
-   * @see https://stackoverflow.com/questions/11287877/how-can-i-get-e-offsetx-on-mobile-ipad
-   */
-  const x = ((result.offsetX || result.pageX - rec.left) / img.offsetWidth) * 100;
-  const y = ((result.offsetY || result.pageY - rec.top) / img.offsetHeight) * 100;
-
-  return `${x}% ${y}%`;
+  return calculateCoords(evt);
 }
