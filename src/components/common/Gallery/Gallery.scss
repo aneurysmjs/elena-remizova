@@ -40,7 +40,7 @@
     transition: transform 0.3s ease;
   }
 
-  @screen sm {
+  @media screen and (min-width: 1024px) and (orientation: landscape) {
     &:nth-child(1) {
       grid-column: span 2;
       grid-row: span 1;
