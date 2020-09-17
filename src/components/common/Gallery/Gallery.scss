@@ -1,30 +1,23 @@
-@import '../../../assets/scss/mixins';
-
 .gallery {
   display: grid;
   grid-auto-flow: dense;
   grid-auto-rows: 400px;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
 
-  @include element(mask) {
-    align-items: center;
-    background: #0000006e;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    position: absolute;
-    top: -100%;
-    transition: top 0.3s ease;
-    width: 100%;
-    z-index: 10;
-    p,
-    h3 {
-      color: white;
-      padding: 1rem;
-    }
+.gallery__mask {
+  top: -100%;
+  transition: top 0.3s ease;
+  @apply absolute bg-black bg-opacity-50 flex-col hidden h-full items-center justify-center w-full z-10;
+
+  @screen sm {
+    @apply flex;
   }
+}
+
+.gallery__mask-title {
+  @apply p-4 text-white;
 }
 
 .gallery__item {
@@ -43,13 +36,11 @@
   }
 
   & img {
-    height: 100%;
-    object-fit: cover;
+    @apply h-full object-cover w-full;
     transition: transform 0.3s ease;
-    width: 100%;
   }
 
-  @include media-sm() {
+  @screen sm {
     &:nth-child(1) {
       grid-column: span 2;
       grid-row: span 1;

@@ -2,6 +2,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 
+import isImageElement from '~/utils/isImageElement';
+
 import pics from './pics';
 
 import './Gallery.scss';
@@ -12,9 +14,15 @@ interface PropsType {
 
 const Gallery: React.FunctionComponent<PropsType> = ({ onClick }: PropsType) => {
   const handleClick = React.useCallback(
-    (evt: React.SyntheticEvent<HTMLDivElement>) => {
-      const target = evt.target as HTMLDivElement;
-      const { src } = target.nextElementSibling as HTMLImageElement;
+    (evt: React.MouseEvent) => {
+      /**
+       * when in a mobile browser, the `mask` on hovering doesn't exist, so the click
+       * goes right away on the <img /> element, that's why we check the type of the
+       * element being clicked
+       */
+      const { src } = isImageElement(evt.target)
+        ? evt.target
+        : ((evt.target as HTMLDivElement).nextElementSibling as HTMLImageElement);
 
       const imagePath = src.replace(/^.*\/\/[^\/]+./, '');
 
@@ -27,9 +35,7 @@ const Gallery: React.FunctionComponent<PropsType> = ({ onClick }: PropsType) => 
       {pics.map(({ id, img, title }) => (
         <div key={id} className="gallery__item">
           <div className="gallery__mask">
-            <div>
-              <h3 className="mb-2 text-center">{title}</h3>
-            </div>
+            <h3 className="gallery__mask-title">{title}</h3>
           </div>
           <img className="gallery__image" src={img} alt={img} />
         </div>
