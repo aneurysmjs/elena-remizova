@@ -40,6 +40,9 @@
     transition: transform 0.3s ease;
   }
 
+  /**
+   * @link https://css-tricks.com/logic-in-media-queries/
+   */
   @media screen and (min-width: 1024px) and (orientation: landscape) {
     &:nth-child(1) {
       grid-column: span 2;

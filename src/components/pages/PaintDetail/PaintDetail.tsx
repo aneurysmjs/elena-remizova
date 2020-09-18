@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import imageZoom from '~/utils/imageZoom';
+import imageZoom, { ZoomEventType } from '~/utils/imageZoom';
 import getImageDimensions, { ImageDimensions } from '~/utils/getImageDimensions';
 import isMobileBrowser from '~/utils/isMobileBrowser';
 
@@ -17,7 +17,12 @@ const PaintDetail: React.FunctionComponent = () => {
   const { paintPath } = useParams<ParamsType>();
   const [position, setPosition] = React.useState<string>();
   const [dimensions, setDimensions] = React.useState<ImageDimensions>();
-  const handleZoom = React.useCallback((e) => setPosition(imageZoom(e)), []);
+  const handleZoom = React.useCallback((e: ZoomEventType) => setPosition(imageZoom(e)), []);
+
+  // Event handlers for image zooming
+  const handleMouseMove = handleZoom;
+  const handleTouchMove = handleZoom;
+  const handleTouchEnd = React.useCallback(() => setPosition('0x 0y'), []);
 
   const content = details.find(({ name }) => paintPath.includes(name));
 
@@ -41,7 +46,9 @@ const PaintDetail: React.FunctionComponent = () => {
             backgroundImage: `url(${paintPath})`,
             paddingBottom: `calc(${dimensions && dimensions.height / dimensions.width} * 100%)`,
           }}
-          {...(isMobileBrowser() ? { onTouchMove: handleZoom } : { onMouseMove: handleZoom })}
+          {...(isMobileBrowser()
+            ? { onTouchMove: handleTouchMove, onTouchEnd: handleTouchEnd }
+            : { onMouseMove: handleMouseMove })}
         >
           <img src={paintPath} alt="detail" />
         </figure>
