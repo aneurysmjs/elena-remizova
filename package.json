@@ -64,6 +64,6 @@
     "react": "16.10.1",
     "react-dom": "16.10.1",
     "react-router-dom": "5.1.1",
-    "tailwindcss": "1.8.8"
+    "tailwindcss": "1.8.10"
   }
 }
