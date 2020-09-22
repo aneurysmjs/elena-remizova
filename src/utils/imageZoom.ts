@@ -1,16 +1,12 @@
 import React from 'react';
 
-import { allPass, complement, compose, ifElse, isNil, map, path, pick, propSatisfies } from 'ramda';
+import { compose, ifElse, map, path, pick } from 'ramda';
 
 import isMobileBrowser from '~/utils/isMobileBrowser';
 
 type ZoomElementType = HTMLImageElement | HTMLElement | HTMLDivElement;
 
-type OnMouseMoveEvent = React.MouseEvent<ZoomElementType>;
-
-type OnTouchMoveEvent = React.TouchEvent<ZoomElementType>;
-
-type ZoomEventType = OnMouseMoveEvent | OnTouchMoveEvent;
+export type ZoomEventType = React.MouseEvent<ZoomElementType> | React.TouchEvent<ZoomElementType>;
 
 interface ZoomFnType {
   (type: ZoomEventType): OffsetType;
@@ -21,20 +17,10 @@ type OffsetType = {
   offsetX: number;
 } & { pageY: number; pageX: number };
 
-interface MapCoord {
-  (coord: string): (x: { [Key: string]: string }) => boolean;
-}
-
 /**
  * Coordinates for mapping between `offsetX`, `offsetY` and `pageX`, `pageY`
  */
 const coords = ['X', 'Y'];
-
-/**
- *
- * @param {MapCoord} pred - curried predicate function
- */
-const mapToCoords = (pred: MapCoord) => map(pred, coords);
 
 /**
  * returns a interpolated string of the form offset`Value`.
@@ -49,21 +35,15 @@ const offset = (coord: string): string => `offset${coord}`;
 const page = (coord: string): string => `page${coord}`;
 
 /**
- * Verifies wheter or not the event has an `offset` or `offset` property
- * @param {string} coord - coordinate
- */
-const itHasOffsetProp = (coord: string) => propSatisfies(complement(isNil), offset(coord));
-
-/**
  *
  * @param {(coord: string) => string} fn - transformation function to map properties from coords
  */
 const pickCoord = (fn: (coord: string) => string) => pick(map(fn, coords));
 
 /**
- * Gets `offsetX` and `offSetY` from event
+ * First retrieves `nativeEvent` property from the event and gets its `offsetX` and `offSetY`
  */
-const getOffset = pickCoord(offset);
+const getOffset = compose(pickCoord(offset), path(['nativeEvent']));
 
 /**
  * Gets `pageX` and `pageY` from event
@@ -76,15 +56,20 @@ const getPage = pickCoord(page);
 const getOffsetTouch = compose(getPage, path(['changedTouches', '0']));
 
 /**
- * Checks that the event has an `offsetX` or `offsetY` properties
+ * Verifies wheter or not is a `touch event`
+ * @param {ZoomEventType} evt - event to verify
  */
-const checkOffset = allPass(mapToCoords(itHasOffsetProp));
+const isTouchEvent = (evt: ZoomEventType): evt is React.TouchEvent<ZoomElementType> => {
+  return (
+    (evt as React.TouchEvent<ZoomElementType>).changedTouches &&
+    (evt as React.TouchEvent<ZoomElementType>).changedTouches['0']
+  );
+};
 
 /**
- * gets the pageX/Y properties from MouseEvent or TouchEvent
+ * gets the pageX/Y - offsetX/Y properties from TouchEvent - MouseEvent
  */
-const getPageCoords: ZoomFnType = (evt) =>
-  ifElse(checkOffset, getOffset, getOffsetTouch)(evt.nativeEvent);
+const getPageCoords: ZoomFnType = ifElse(isTouchEvent, getOffsetTouch, getOffset);
 
 /**
  * calculates offset's coordinates from web or mobile
@@ -93,7 +78,6 @@ const getPageCoords: ZoomFnType = (evt) =>
 const calculateCoords = (evt: ZoomEventType): string => {
   const img = evt.currentTarget;
   const result = getPageCoords(evt);
-
   const rec = img.getBoundingClientRect();
 
   /**
@@ -101,7 +85,6 @@ const calculateCoords = (evt: ZoomEventType): string => {
    * @link https://ru.stackoverflow.com/questions/653693/%D0%92-%D1%87%D0%B5%D0%BC-%D1%80%D0%B0%D0%B7%D0%BD%D0%B8%D1%86%D0%B0-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-pagex-y-clientx-y-screenx-y-%D0%B2-javascript
    *
    * get e.offsetX/Y on mobile/iPad
-   *
    * @see https://stackoverflow.com/questions/11287877/how-can-i-get-e-offsetx-on-mobile-ipad
    */
   const x = ((result.offsetX || result.pageX - rec.left) / img.offsetWidth) * 100;
