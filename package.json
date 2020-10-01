@@ -57,7 +57,7 @@
     "yarn": "1.22.5"
   },
   "dependencies": {
-    "@loadable/component": "5.10.3",
+    "@loadable/component": "5.13.2",
     "firebase": "7.20.0",
     "lodash.throttle": "4.1.1",
     "postcss-modules": "3.2.2",
