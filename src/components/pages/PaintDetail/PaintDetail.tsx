@@ -17,9 +17,8 @@ const PaintDetail: React.FunctionComponent = () => {
   const { paintPath } = useParams<ParamsType>();
   const [position, setPosition] = React.useState<string>();
   const [dimensions, setDimensions] = React.useState<ImageDimensions>();
-  const handleZoom = React.useCallback((e: ZoomEventType) => setPosition(imageZoom(e)), []);
-
   // Event handlers for image zooming
+  const handleZoom = React.useCallback((e: ZoomEventType) => setPosition(imageZoom(e)), []);
   const handleMouseMove = handleZoom;
   const handleTouchMove = handleZoom;
   const handleTouchEnd = React.useCallback(() => setPosition('0x 0y'), []);
@@ -51,6 +50,7 @@ const PaintDetail: React.FunctionComponent = () => {
             : { onMouseMove: handleMouseMove })}
         >
           <img src={paintPath} alt="detail" />
+          <div className="paint__image-loader" />
         </figure>
         <p className="paint-detail__zoom-info--touch">
           коснитесь изображения и переместите палец, чтобы увеличить.
