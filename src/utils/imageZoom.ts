@@ -8,14 +8,14 @@ type ZoomElementType = HTMLImageElement | HTMLElement | HTMLDivElement;
 
 export type ZoomEventType = React.MouseEvent<ZoomElementType> | React.TouchEvent<ZoomElementType>;
 
-interface ZoomFnType {
-  (type: ZoomEventType): OffsetType;
-}
-
 type OffsetType = {
   offsetY: number;
   offsetX: number;
 } & { pageY: number; pageX: number };
+
+interface ZoomFnType {
+  (type: ZoomEventType): OffsetType;
+}
 
 /**
  * Coordinates for mapping between `offsetX`, `offsetY` and `pageX`, `pageY`
