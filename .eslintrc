@@ -38,6 +38,11 @@
     "sourceType": "module"  // Allows for the use of imports
   },
   "rules": {
+     /**
+    * @see https://stackoverflow.com/a/64024916/5378393
+    */
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
     "@typescript-eslint/indent": ["error", 2],
     "react/jsx-uses-vars": "error",
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
